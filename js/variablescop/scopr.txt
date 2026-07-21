@@ -1,0 +1,82 @@
+JavaScript Variable Scope?
+
+=> Variable Scope determines where a variable can be accessed in a JavaScript program.
+
+types of variable scope in JavaScript:
+
+Global Scope
+Function Scope
+Block Scope
+
+Global Scope
+
+A variable declared outside any function or block has global scope.
+
+=> Accessible from anywhere in the program. Can be accessed inside functions and blocks.
+
+Function Scope
+
+=> Variables declared using var inside a function are only accessible inside that function
+
+Block Scope
+
+=> Variables declared with let and const are block scoped.
+=> A block is anything inside { }.
+
+Lexical Scope
+
+=> A child function can access variables from its parent function.
+
+| Feature        | var   | let    | const |
+| -------------- | ---   | ---    | ----- |
+| Global Scope   | ✅   | ✅   | ✅     |
+| Function Scope | ✅   | ❌   | ❌     |
+| Block Scope    | ❌   | ✅   | ✅     |
+
+
+Interview Questions ::
+1. What is variable scope?
+
+=> Variable scope defines where a variable can be accessed in a JavaScript program.
+
+2. How many types of scope are there?
+=>Global Scope
+=>Function Scope
+=>Block Scope
+=>Lexical Scope
+3. Which keywords are block scoped?
+=>let
+=>const
+4. Which keyword is function scoped?
+=>var
+5. Can a child function access a parent's variable?
+
+=>Yes. This is called lexical scope.
+
+6. Can a parent function access a child's variable?
+
+=>No.
+
+function parent() {
+
+    function child() {
+        let x = 10;
+    }
+
+    console.log(x);
+}
+
+parent();
+
+Output
+
+ReferenceError: x is not defined
+
+
+
+Summary
+Scope	                   Declared Where	                                Accessible Where
+Global	               Outside all functions/blocks	                           Everywhere
+Function	                Inside a function (var)                     	Only inside that function
+Block	                Inside {} using let or const	                      Only inside that block
+Lexical	                    Nested functions	                   Child functions can access parent variables
