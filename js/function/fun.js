@@ -189,8 +189,44 @@
 //syntax
 // array.shift();
 
- const fruits = ["Apple", "Banana", "Orange"];
+//  const fruits = ["Apple", "Banana", "Orange"];
 
- fruits.shift("Apple");
+//  fruits.shift("Apple");
 
- console.log(fruits);
+//  console.log(fruits);
+
+//*********some */
+//some() Method
+// Definition
+
+// The some() method checks whether at least one element in an array satisfies the given condition.
+
+// Returns true if at least one element matches.
+// Returns false if no element matches.
+
+// const numbers = [5, 7, 10, 13];
+
+// const result = numbers.some(num => num % 2 === 0);
+
+// console.log(result);
+
+
+//*********every     */
+
+// The every() method checks whether all elements satisfy the condition.
+
+// Returns true if every element passes.
+// Returns false if even one element fails.
+
+// const numbers = [10, 20, 30];
+
+// const result = numbers.every(num => num > 0);
+
+// console.log(result);
+
+//*********sort     */
+const fruits = ["Orange", "Apple", "Banana"];
+
+fruits.sort();
+
+console.log(fruits);
