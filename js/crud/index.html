@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Student CRUD App</h2>
+
+<form id="studentForm">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter Name"
+        required
+    >
+
+    <input
+        type="number"
+        id="age"
+        placeholder="Enter Age"
+        required
+    >
+
+    <input
+        type="text"
+        id="course"
+        placeholder="Enter Course"
+        required
+    >
+
+    <button type="submit">
+        Save
+    </button>
+
+</form>
+
+
+<br>
+
+<table border="1" cellpadding="10">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Course</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentList">
+<td>1</td>
+<td>Raju</td>
+<td>25</td>
+<td>Web Development</td>
+<td><button>Edit</button></td>
+<td><button>Delete</button></td>
+</tbody>
+
+</table>
+
+    
+<script src="./script.js"></script>
+</body>
+</html>
