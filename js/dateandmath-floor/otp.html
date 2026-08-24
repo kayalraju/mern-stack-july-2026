@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTP Generator</title>
+</head>
+<body>
+
+    <h2>OTP Generator</h2>
+
+    <button id="generateBtn">Generate OTP</button>
+
+    <h3 id="otp"></h3>
+
+    <script>
+
+        const generateBtn = document.getElementById("generateBtn");
+        const otp = document.getElementById("otp");
+
+        generateBtn.addEventListener("click", function () {
+
+            const randomNumber = Math.floor(
+                100000 + Math.random() * 900000
+            );
+
+            otp.innerHTML = "Your OTP is: " + randomNumber;
+
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        input {
+            padding: 10px;
+            width: 90%;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Age Calculator</h2>
+
+        <label>Enter Your Date of Birth</label>
+
+        <input type="date" id="dob">
+
+        <br>
+
+        <button id="calculateBtn">
+            Calculate Age
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+
+    <script>
+
+        // Get HTML elements
+        const dobInput = document.getElementById("dob");
+        const calculateBtn = document.getElementById("calculateBtn");
+        const result = document.getElementById("result");
+
+
+        // Button click event
+        calculateBtn.addEventListener("click", function () {
+
+            // Get DOB value
+            const dobValue = dobInput.value;
+
+            // Check DOB
+            if (dobValue === "") {
+                result.innerHTML = "Please select your Date of Birth";
+                return;
+            }
+
+
+            // Create Date objects
+            const dob = new Date(dobValue);
+            const today = new Date();
+
+
+            // Get year, month and day
+            let years = today.getFullYear() - dob.getFullYear();
+
+            let months = today.getMonth() - dob.getMonth();
+
+            let days = today.getDate() - dob.getDate();
+
+
+            // If days are negative
+            if (days < 0) {
+
+                months--;
+
+                // Get number of days in previous month
+                const previousMonth = new Date(
+                    today.getFullYear(),
+                    today.getMonth(),
+                    0
+                );
+
+                days += previousMonth.getDate();
+            }
+
+
+            // If months are negative
+            if (months < 0) {
+
+                years--;
+
+                months += 12;
+            }
+
+
+            // Display result
+            result.innerHTML = `
+                Your Age is:<br><br>
+
+                ${years} Years
+                ${months} Months
+                ${days} Days
+            `;
+
+        });
+
+    </script>
+
+</body>
+</html>
