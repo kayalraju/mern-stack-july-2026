@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    color: red;
+    background-color: rgb(15, 139, 221);
+    border: 2px solid green;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.container{
+    background-color: rgb(16, 205, 51);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+.about{
+    padding: 50px;
+}
+
+#container{
+    background-color: rgb(220, 157, 10);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+#hello{
+    color: red;
+    background-color: rgb(15, 139, 221);
+    border: 2px solid green;
+    font-family: 'Courier New', Courier, monospace;
+}
