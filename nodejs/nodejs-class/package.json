@@ -1,0 +1,12 @@
+{
+  "name": "nodejs-class",
+  "version": "1.0.0",
+  "description": "crete a nodejs app",
+  "license": "ISC",
+  "author": "webskitters",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
