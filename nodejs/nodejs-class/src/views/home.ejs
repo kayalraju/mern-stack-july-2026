@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1 style="background-color: aqua;">Home Page</h1>
+    <a href="/about">About</a>
+
+   <% if (user) { %>
+  <h1>Hello <%= user %></h1>
+<% } %>
+
+<h1>user Details</h1>
+<% if (data) { %>
+    <p>Name: <%= data.name %></p>
+    <p>Age: <%= data.age %></p>
+    <p>Address: <%= data.address %></p>
+    <p>Course: <%= data.course %></p>
+<% } %>

@@ -4,11 +4,23 @@
 class HomeController{
 
     async home(req,res){
-        res.send("<h1>hello world</h1>")
+        const data={
+            name:"Raju",
+            age:20,
+            address:"Bangalore",
+            course:"Nodejs"
+        }
+        res.render('home',{
+            title:'Home Page',
+            user:"Raju",
+            data:data
+        })
     }
 
     async about(req,res){
-        res.send("<h1>about page</h1>")
+        res.render('about',{
+            title:'About Page'
+        })
     }   
 
 }
