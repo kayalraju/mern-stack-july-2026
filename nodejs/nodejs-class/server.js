@@ -2,10 +2,13 @@ require('dotenv').config();
 const express=require('express');
 const ejs=require('ejs');
 const path=require('path');
+const DbConnection=require('./src/config/dbcon');
 
 
 
 const app=express();
+//db connection
+DbConnection();
 
 app.set('view engine','ejs');
 app.set('views','./src/views');
