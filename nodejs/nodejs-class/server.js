@@ -12,13 +12,17 @@ DbConnection();
 
 app.set('view engine','ejs');
 app.set('views','./src/views');
+//json
+app.use(express.json());
 //create statioc folder
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 const homeRoute=require('./src/router/home.route');
+const studentRoute=require('./src/router/student.route');
 app.use(homeRoute);
+app.use('/api',studentRoute);
 
 
 
