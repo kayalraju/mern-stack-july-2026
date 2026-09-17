@@ -22,6 +22,10 @@ class HomeController{
             title:'About Page'
         })
     }   
+    async admin(req,res){
+        const {id,name} =req.params
+        return res.send(`Admin Page ${id} and name is ${name}`)
+    }   
 
 }
 
