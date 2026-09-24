@@ -3,6 +3,7 @@ const Student = require("../models/student.model");
 class StudentController {
   async CreateStudent(req, res) {
     //console.log(req.body);
+    //console.log(req.file);
     try {
       const { name, email, phone, address } = req.body;
       if (!name || !email || !phone || !address) {
@@ -17,6 +18,10 @@ class StudentController {
         phone,
         address,
       });
+
+      if (req.file) {
+        studentData.image = req.file.path;
+      }
 
       const data = await studentData.save();
       return res.status(201).json({

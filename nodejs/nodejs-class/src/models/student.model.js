@@ -17,6 +17,11 @@ const studentSchema=new Schema({
        required:[true,'Phone is required'],
        unique:true
    },
+   image:{
+       type:String,
+       required:false,
+       default:'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+   },
    address:{
        type:String,
        required:[true,'Address is required']
