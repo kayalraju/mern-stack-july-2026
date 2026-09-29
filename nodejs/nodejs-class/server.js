@@ -14,6 +14,7 @@ app.set('view engine','ejs');
 app.set('views','./src/views');
 //json
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 //create statioc folder
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,6 +23,8 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
 const homeRoute=require('./src/router/home.route');
 const studentRoute=require('./src/router/student.route');
+const productRoute=require('./src/router/product.route');
+app.use(productRoute);
 app.use(homeRoute);
 app.use('/api',studentRoute);
 
