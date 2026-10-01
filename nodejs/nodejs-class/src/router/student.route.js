@@ -13,10 +13,10 @@ Route.put('/student/update/:id',StudentController.updateStudent)
 Route.delete('/student/delete/:id',StudentController.deleteStudent)
 
 
+//search student
+Route.get("/search", StudentController.searchStudent);
 
-
-
-
+Route.get("/filter", StudentController.filterStudent);
 module.exports=Route
 
 

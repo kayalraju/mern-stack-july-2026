@@ -24,6 +24,10 @@ const ProductSchema=new Schema({
        type:String,
        required:[true,'Brand is required']
    },
+   is_deleted:{
+       type:Boolean,
+       default:false
+   }
     
 },{
     timestamps:true

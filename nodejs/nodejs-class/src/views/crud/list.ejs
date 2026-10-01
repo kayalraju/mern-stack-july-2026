@@ -12,7 +12,7 @@
 <body>
     <div class="container mt-10">
         <h1>Product List</h1>
-        <a href="/product/create" class="btn btn-info">Add Product</a> || <a href="/" class="btn btn-warning">Recovery Product</a>
+        <a href="/product/create" class="btn btn-info">Add Product</a> || <a href="/" class="btn btn-warning">Recycle Bin</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Brand</th>
                     <th scope="col">image</th>
-                    <th colspan="3">Action</th>
+                    <th colspan="4">Action</th>
                 </tr>
             </thead>
             <% for(let products of product) {%>
@@ -36,9 +36,10 @@
                     <td><%= products.description %></td>
                     <td><%= products.brand %></td>
                     <td><img src="<%= products.image %>" width="50px" height="50px"></td>
-                    <td><a href="" class="btn btn-primary">Edit</a></td> 
+                    <td><a href="/product/edit/<%= products._id %>" class="btn btn-primary">Edit</a></td> 
                     <td><a href="" class="btn btn-success">view</a></td>
-                    <td><a href="" class="btn btn-danger">Delete</a></td>
+                    <td><a href="/product/delete/<%= products._id %>" class="btn btn-danger">Delete</a></td>
+                    <td><a href="/product/softdelete/<%= products._id %>" class="btn btn-warning">Soft Delete</a></td>
                 </tr>
                 
             </tbody>

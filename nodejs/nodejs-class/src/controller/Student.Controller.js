@@ -120,6 +120,51 @@ class StudentController {
       });
     }
   }
+
+  async searchStudent(req, res) {
+    try {
+      const { name } = req.query;
+
+      if (!name) {
+        return res.status(400).json({
+          status: false,
+          message: "Name is required",
+        });
+      }
+
+      const data = await Student.find({
+        name: { $regex: name, $options: "i" },
+      });
+
+      return res.status(200).json({
+        status: true,
+        message: "Student data fetched successfully",
+        data,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: false,
+        message: error.message,
+      });
+    }
+  }
+
+  async filterStudent(req, res) {
+    try {
+      const { phone } = req.query;
+      const data = await Student.find({ phone });
+      return res.status(200).json({
+        status: true,
+        message: "Filtered student data fetched successfully",
+        data,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: false,
+        message: error.message,
+      });
+    }
+  }
 }
 
 module.exports = new StudentController();
