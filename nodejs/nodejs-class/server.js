@@ -24,10 +24,11 @@ app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 const homeRoute=require('./src/router/home.route');
 const studentRoute=require('./src/router/student.route');
 const productRoute=require('./src/router/product.route');
+const authRouter= require('./src/router/auth.route');
 app.use(productRoute);
 app.use(homeRoute);
 app.use('/api',studentRoute);
-
+app.use('/api',authRouter);
 
 
 
