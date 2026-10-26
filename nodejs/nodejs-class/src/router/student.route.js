@@ -1,16 +1,17 @@
 const express=require('express');
 const StudentController = require('../controller/Student.Controller');
 const upload = require('../utils/multer');
+const Auth = require('../middleware/auth');
 
 const Route=express.Router();
 
 
 
-Route.post('/student/create',upload.single('image'),StudentController.CreateStudent)
-Route.get('/student',StudentController.getStudent)
-Route.get('/student/:id',StudentController.getsingledata)
-Route.put('/student/update/:id',StudentController.updateStudent)
-Route.delete('/student/delete/:id',StudentController.deleteStudent)
+Route.post('/student/create',Auth,upload.single('image'),StudentController.CreateStudent)
+Route.get('/student',Auth,StudentController.getStudent)
+Route.get('/student/:id',Auth,StudentController.getsingledata)
+Route.put('/student/update/:id',Auth,StudentController.updateStudent)
+Route.delete('/student/delete/:id',Auth,StudentController.deleteStudent)
 
 
 //search student

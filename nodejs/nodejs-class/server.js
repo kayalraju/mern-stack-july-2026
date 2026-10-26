@@ -30,7 +30,10 @@ app.use(homeRoute);
 app.use('/api',studentRoute);
 app.use('/api',authRouter);
 
+//*****admin router */
 
+const adminRouter=require('./src/router/admin/admin.auth.router')
+app.use('/api/admin',adminRouter)
 
 
 const Port=process.env.PORT || 3000;
