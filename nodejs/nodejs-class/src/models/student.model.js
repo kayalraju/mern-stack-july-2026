@@ -5,7 +5,8 @@ const Schema=mongoose.Schema
 const studentSchema=new Schema({
     name:{
         type:String,
-        required:[true,'Name is required']
+        required:[true,'Name is required'],
+        unique:true
     },
     email:{
         type:String,
@@ -29,11 +30,19 @@ const studentSchema=new Schema({
    createdAt:{
        type:Date,
        default:Date.now
+   },
+   studentBio:{
+       type:String
    }
     
 },{
     timestamps:true
-})
+},
+)
+
+//indexing
+studentSchema.index({name:1},{unique:true})
+studentSchema.index({studentBio:"text"})
 
 const StudentModel=mongoose.model('student',studentSchema)
 
