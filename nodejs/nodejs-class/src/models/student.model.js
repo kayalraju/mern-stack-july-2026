@@ -41,8 +41,8 @@ const studentSchema=new Schema({
 )
 
 //indexing
-studentSchema.index({name:1},{unique:true})
-studentSchema.index({studentBio:"text"})
+//studentSchema.index({name:1},{unique:true})
+//studentSchema.index({studentBio:"text"})
 
 const StudentModel=mongoose.model('student',studentSchema)
 

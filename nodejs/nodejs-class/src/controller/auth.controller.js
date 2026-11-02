@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
-const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken');
+const verifyedEmail = require("../utils/send.mail");
 
 class AuthController {
   async register(req, res) {
@@ -29,9 +30,10 @@ class AuthController {
         password: hsahedpassword,
       });
       const data = await user.save();
+      await verifyedEmail(req, data);
       return res.status(201).json({
         success: true,
-        message: "User created successfully",
+        message: "User created successfully and OTP sent to email for verification",
         data: data,
       });
     } catch (error) {
@@ -66,6 +68,13 @@ class AuthController {
           message: "Invalid credentials",
         });
       }
+
+       if(!user.isVerified){
+            return res.status(400).json({
+                success: false,
+                message: "Please verify your email",
+              });
+        }
 
       const token=jwt.sign({
         id:user._id,
