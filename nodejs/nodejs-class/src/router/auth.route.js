@@ -9,8 +9,10 @@ const Router=express.Router();
 
 
 Router.post('/register', Validation.validate(AuthValidation.signup),authController.register)
+Router.post('/verify',authController.verify)
 Router.post('/login',authController.login)
 Router.get('/dashboard',Auth,authController.dashboard)
+Router.post('/update-password',Auth,authController.updatePassword)
 
 
 

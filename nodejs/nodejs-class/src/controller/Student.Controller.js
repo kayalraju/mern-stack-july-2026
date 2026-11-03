@@ -7,6 +7,7 @@ class StudentController {
     try {
       const { name, email, phone, address } = req.body;
       if (!name || !email || !phone || !address) {
+        logger.error("All fields are required");
         return res.status(400).json({
           success: false,
           message: "All fields are required",
@@ -30,6 +31,7 @@ class StudentController {
         data: data,
       });
     } catch (error) {
+      logger.error("Error creating student:", error);
       return res.status(500).json({
         success: false,
         message: error.message,

@@ -3,12 +3,29 @@ const express=require('express');
 const ejs=require('ejs');
 const path=require('path');
 const DbConnection=require('./src/config/dbcon');
+const cors=require('cors');
+const helmet=require('helmet');
+const morgan=require('morgan');
+const logger=require('./src/utils/logger');
 
 
 
 const app=express();
 //db connection
 DbConnection();
+
+app.use(cors([
+    {
+        origin:'*',
+        methods:['GET','POST','PUT','PATCH','DELETE'],
+        allowedHeaders:['Content-Type','Authorization'],
+
+    }
+]));
+
+app.use(helmet())
+
+app.use(morgan('dev'));
 
 app.set('view engine','ejs');
 app.set('views','./src/views');
@@ -39,5 +56,5 @@ app.use('/api/admin',adminRouter)
 const Port=process.env.PORT || 3000;
 
 app.listen(Port,()=>{
-    console.log(`server is running on port ${Port}`)
+     logger.info(`server is running on port http://localhost:${Port}`)
 })

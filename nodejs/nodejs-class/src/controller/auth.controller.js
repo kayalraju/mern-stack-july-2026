@@ -2,6 +2,7 @@ const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
 const jwt=require('jsonwebtoken');
 const verifyedEmail = require("../utils/send.mail");
+const OTP = require("../models/otp.model");
 
 class AuthController {
   async register(req, res) {
@@ -44,6 +45,57 @@ class AuthController {
     }
   }
 
+  async verify(req,res){
+    try {
+            const { email, otp } = req.body;
+            // Check if all required fields are provided
+            if (!email || !otp) {
+                return res.status(400).json({ status: false, message: "All fields are required" });
+            }
+            const existingUser = await User.findOne({ email });
+
+            // Check if email doesn't exists
+            if (!existingUser) {
+                return res.status(404).json({ status: "failed", message: "user doesn't exists" });
+            }
+
+            // Check if email is already verified
+            if (existingUser.isVerified) {
+                return res.status(400).json({ status: false, message: "Email is already verified" });
+            }
+            // Check if there is a matching email verification OTP
+            const emailVerification = await OTP.findOne({ userId: existingUser._id, otp });
+            if (!emailVerification) {
+                if (!existingUser.isVerified) {
+                    // console.log(existingUser);
+                    await verifyedEmail(req, existingUser);
+                    return res.status(400).json({ status: false, message: "Invalid OTP, new OTP sent to your email" });
+                }
+                return res.status(400).json({ status: false, message: "Invalid OTP" });
+            }
+            // Check if OTP is expired
+            const currentTime = new Date();
+            // 10 * 60 * 1000 calculates the expiration period in milliseconds(10 minutes).
+            const expirationTime = new Date(emailVerification.createdAt.getTime() + 10 * 60 * 1000);
+            if (currentTime > expirationTime) {
+                // OTP expired, send new OTP
+                await verifyedEmail(req, existingUser);
+                return res.status(400).json({ status: "failed", message: "OTP expired, new OTP sent to your email" });
+            }
+            // OTP is valid and not expired, mark email as verified
+            existingUser.isVerified = true;
+            await existingUser.save();
+
+            // Delete email verification document
+            await OTP.deleteMany({ userId: existingUser._id });
+            return res.status(200).json({ status: true, message: "Email verified successfully" });
+
+
+        } catch (error) {
+            return res.status(500).json({ status: false, message: "Unable to verify email, please try again later" });
+        }
+
+  }
 
   async login(req,res){
     try{
@@ -109,6 +161,46 @@ class AuthController {
         success: true,
         message: "welcome to user Dashboard",
         user:req.user
+      });
+    }catch(error){
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+
+  async updatePassword(req,res){
+    try{
+      const {oldPassword,newPassword}=req.body;
+      if(!oldPassword || !newPassword){
+        logger.error("All fields are required");
+        return res.status(400).json({
+          success: false,
+          message: "All fields are required",
+        });
+      }
+      const user = await User.findById(req.user.id);
+      if(!user){
+        logger.error("User does not exist");
+        return res.status(400).json({
+          success: false,
+          message: "User does not exist",
+        });
+      }
+      const isMatch = await bcryptjs.compare(oldPassword,user.password);
+      if(!isMatch){
+        logger.error("Invalid credentials");
+        return res.status(400).json({
+          success: false,
+          message: "Invalid credentials",
+        });
+      }
+      user.password=newPassword;
+      await user.save();
+      return res.status(200).json({
+        success: true,
+        message: "Password updated successfully",
       });
     }catch(error){
       return res.status(500).json({

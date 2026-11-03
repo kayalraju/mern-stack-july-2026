@@ -1,4 +1,5 @@
 const Product = require("../models/product.model");
+const logger = require("../utils/logger");
 
 
 
@@ -37,7 +38,9 @@ class ProductController {
         }
         
     }catch(error){
-        console.log(error);
+       
+        logger.error('Error creating product:', error);
+        return res.status(500).json({ message: "Internal server error" });
     }
   }
 
@@ -53,7 +56,8 @@ class ProductController {
         product: product
       });
     }catch (error) {
-      console.log(error);
+      logger.error('Error fetching product for edit:', error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
 
@@ -72,7 +76,8 @@ class ProductController {
       return res.redirect('/product');
 
     }catch(error){
-      console.log(error);
+      logger.error('Error updating product:', error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
   async deleteProduct(req, res) {
@@ -84,7 +89,8 @@ class ProductController {
       const deletedProduct = await Product.findByIdAndDelete(id);
       return res.redirect('/product');
     }catch(error){
-      console.log(error);
+      logger.error('Error deleting product:', error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
 
@@ -98,7 +104,8 @@ class ProductController {
       const deletedProduct = await Product.findByIdAndUpdate(id, { is_deleted: true }, { new: true });
       return res.redirect('/product');
     }catch(error){
-      console.log(error);
+      logger.error('Error soft deleting product:', error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   }
 }
