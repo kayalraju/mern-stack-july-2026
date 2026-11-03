@@ -170,45 +170,87 @@ class AuthController {
     }
   }
 
-  async updatePassword(req,res){
-    try{
-      const {oldPassword,newPassword}=req.body;
-      if(!oldPassword || !newPassword){
-        logger.error("All fields are required");
-        return res.status(400).json({
-          success: false,
-          message: "All fields are required",
-        });
-      }
-      const user = await User.findById(req.user.id);
-      if(!user){
-        logger.error("User does not exist");
-        return res.status(400).json({
-          success: false,
-          message: "User does not exist",
-        });
-      }
-      const isMatch = await bcryptjs.compare(oldPassword,user.password);
-      if(!isMatch){
-        logger.error("Invalid credentials");
-        return res.status(400).json({
-          success: false,
-          message: "Invalid credentials",
-        });
-      }
-      user.password=newPassword;
-      await user.save();
-      return res.status(200).json({
-        success: true,
-        message: "Password updated successfully",
-      });
-    }catch(error){
-      return res.status(500).json({
+
+
+async updatePassword(req, res) {
+  try {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    // Validate fields
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return res.status(400).json({
         success: false,
-        message: error.message,
+        message: "All fields are required",
       });
     }
+
+    // Check new password confirmation
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password and confirm password do not match",
+      });
+    }
+
+    // Find logged-in user
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User does not exist",
+      });
+    }
+
+    // Check old password
+    const isMatch = await bcryptjs.compare(
+      oldPassword,
+      user.password
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Old password is incorrect",
+      });
+    }
+
+    // Check new password is different
+    const isSamePassword = await bcryptjs.compare(
+      newPassword,
+      user.password
+    );
+
+    if (isSamePassword) {
+      return res.status(400).json({
+        success: false,
+        message: "New password must be different from old password",
+      });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcryptjs.hash(newPassword, 10);
+
+    // Update password
+    user.password = hashedPassword;
+
+    // Save user
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+
+  } catch (error) {
+    logger.error(`Update password error: ${error.message}`);
+
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating password",
+    });
   }
+}
 }
 
 module.exports = new AuthController();

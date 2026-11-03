@@ -27,3 +27,5 @@
 {"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-03T04:43:06.910Z"}
 {"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-03T04:43:12.572Z"}
 {"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-03T04:43:13.124Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-03T04:52:23.318Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-03T04:52:23.949Z"}
