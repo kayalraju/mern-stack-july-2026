@@ -7,6 +7,7 @@ const cors=require('cors');
 const helmet=require('helmet');
 const morgan=require('morgan');
 const logger=require('./src/utils/logger');
+const cookieParser=require('cookie-parser');
 
 
 
@@ -24,6 +25,7 @@ app.use(cors([
 ]));
 
 app.use(helmet())
+app.use(cookieParser())
 
 app.use(morgan('dev'));
 
@@ -37,11 +39,13 @@ app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
-
+const authEjsRouter=require('./src/router/auth.ejsroute')
+app.use(authEjsRouter)
 const homeRoute=require('./src/router/home.route');
 const studentRoute=require('./src/router/student.route');
 const productRoute=require('./src/router/product.route');
 const authRouter= require('./src/router/auth.route');
+
 app.use(productRoute);
 app.use(homeRoute);
 app.use('/api',studentRoute);
@@ -51,6 +55,8 @@ app.use('/api',authRouter);
 
 const adminRouter=require('./src/router/admin/admin.auth.router')
 app.use('/api/admin',adminRouter)
+
+
 
 
 const Port=process.env.PORT || 3000;
