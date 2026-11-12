@@ -6,48 +6,80 @@ const OTP = require("../models/otp.model");
 const logger = require("../utils/logger");
 const transporter = require("../config/emailconfig");
 const httpStatus = require("../utils/status.code");
+const {
+  generateAccessToken,
+  generateRefreshToken,
+  hashToken,
+  refreshCookieOptions,
+  getRefreshExpiry,
+} = require("../utils/auth.token");
 
 class AuthController {
-  async register(req, res) {
-    try {
-      const { name, email, phone, password } = req.body;
-      if (!name || !email || !phone || !password) {
-        return res.status(httpStatus.BAD_REQUEST).json({
-          success: false,
-          message: "All fields are required",
-        });
-      }
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(httpStatus.CONFLICT).json({
-          success: false,
-          message: "User already exists",
-        });
-      }
-      //hash password
-      const salt = await bcryptjs.genSalt(10);
-      const hsahedpassword = await bcryptjs.hash(password, salt);
-      const user = new User({
-        name,
-        email,
-        phone,
-        password: hsahedpassword,
-      });
-      const data = await user.save();
-      await verifyedEmail(req, data);
-      return res.status(httpStatus.CREATED).json({
-        success: true,
-        message:
-          "User created successfully and OTP sent to email for verification",
-        data: data,
-      });
-    } catch (error) {
-      return res.status(500).json({
+  
+async register(req, res) {
+  try {
+    const { name, email, phone, password } = req.body;
+
+    // 1. Validate fields
+    if (!name || !email || !phone || !password) {
+      return res.status(httpStatus.BAD_REQUEST).json({
         success: false,
-        message: error.message,
+        message: "All fields are required",
       });
     }
+
+    // 2. Check existing user
+    const existingUser = await User.findOne({
+      email: email.trim().toLowerCase(),
+    });
+
+    if (existingUser) {
+      return res.status(httpStatus.CONFLICT).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+
+    // 3. Hash password
+    const hashedPassword = await bcryptjs.hash(password, 10);
+
+    // 4. Create user document (not saved yet)
+    const user = new User({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      phone,
+      password: hashedPassword,
+    });
+
+    // 5. Send verification email first
+    //await verifyedEmail(req, user);
+
+    // 6. Save user only after email succeeds
+    const data = await user.save();
+
+    // 7. Success response
+    return res.status(httpStatus.CREATED).json({
+      success: true,
+      message: "User created successfully and OTP sent to email",
+    });
+
+  } catch (error) {
+    console.error("Registration Error:", error);
+
+    if (error.code === 11000) {
+      return res.status(httpStatus.CONFLICT).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+
+    return res.status(httpStatus.SERVER_ERROR).json({
+      success: false,
+      message: "Unable to register user. Please try again.",
+    });
   }
+}
+
 
   async verify(req, res) {
     try {
@@ -129,63 +161,246 @@ class AuthController {
   async login(req, res) {
     try {
       const { email, password } = req.body;
-      if (!email || !password) {
+
+      // 1. Validate fields
+      if (
+        typeof email !== "string" ||
+        typeof password !== "string" ||
+        !email.trim() ||
+        !password
+      ) {
         return res.status(400).json({
           success: false,
-          message: "All fields are required",
+          message: "Email and password are required",
         });
       }
-      const user = await User.findOne({ email });
+      // 2. Find user
+      const user = await User.findOne({
+        email: email.trim().toLowerCase(),
+      }).select("+password +refreshTokenHash");
+
+      console.log("user",user);
       if (!user) {
-        return res.status(400).json({
+        return res.status(401).json({
           success: false,
-          message: "User does not exist",
-        });
-      }
-      const isMatch = await bcryptjs.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({
-          success: false,
-          message: "Invalid credentials",
+          message: "Invalid email or password",
         });
       }
 
+      // 3. Verify password
+      const isMatch = await bcryptjs.compare(
+        password,
+        user.password
+      );
+
+      if (!isMatch) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid email or password",
+        });
+      }
+
+      // 4. Verify email
       if (!user.isVerified) {
-        return res.status(400).json({
+        return res.status(403).json({
           success: false,
           message: "Please verify your email",
         });
       }
 
-      const token = jwt.sign(
-        {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-        },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: "1d" },
+      // 5. Generate tokens
+      const accessToken = generateAccessToken(user);
+
+      const refreshToken = generateRefreshToken(user);
+
+      // 6. Hash refresh token
+      const refreshTokenHash = hashToken(refreshToken);
+
+      // 7. Save refresh token in database
+      user.refreshTokenHash = refreshTokenHash;
+
+      user.refreshTokenExpiresAt = getRefreshExpiry();
+
+      user.lastLogin = new Date();
+
+      await user.save();
+
+      // 8. Set HTTP-only cookie
+      res.cookie(
+        "refreshToken",
+        refreshToken,
+        refreshCookieOptions()
       );
 
+      // 9. Response
       return res.status(200).json({
         success: true,
-        message: "User logged in successfully",
+        message: "Login successful",
+
         user: {
           id: user._id,
           name: user.name,
           email: user.email,
           phone: user.phone,
+          role: user.role,
+          lastLogin: user.lastLogin,
         },
-        token: token,
+
+        accessToken,
       });
+
     } catch (error) {
+      console.error("Login Error:", error);
+
       return res.status(500).json({
         success: false,
-        message: error.message,
+        message: "Internal server error",
       });
     }
   }
+ 
+
+  async refreshToken(req,res){
+    try {
+
+      // 1. Get refresh token from cookie
+      const refreshToken = req.cookies?.refreshToken;
+
+      if (!refreshToken) {
+        return res.status(401).json({
+          success: false,
+          message: "Refresh token is required",
+        });
+      }
+
+      // 2. Verify refresh token
+      let decoded;
+
+      try {
+        decoded = jwt.verify(
+          refreshToken,
+          process.env.JWT_REFRESH_SECRET_KEY,
+          {
+            algorithms: ["HS256"],
+            issuer: "my-app",
+            audience: "my-app-client",
+          }
+        );
+
+      } catch (error) {
+
+        res.clearCookie(
+          "refreshToken",
+          refreshCookieOptions()
+        );
+
+        return res.status(401).json({
+          success: false,
+          message: "Invalid or expired refresh token",
+        });
+      }
+
+      // 3. Validate token type
+      if (
+        decoded.type !== "refresh" ||
+        !decoded.sub ||
+        !decoded.jti
+      ) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid refresh token",
+        });
+      }
+
+      // 4. Generate hash of incoming token
+      const incomingHash = hashToken(refreshToken);
+
+      // 5. Find user
+      const user = await User.findOne({
+        _id: decoded.sub,
+        refreshTokenHash: incomingHash,
+        refreshTokenExpiresAt: {
+          $gt: new Date(),
+        },
+      }).select("+refreshTokenHash");
+
+      if (!user) {
+        res.clearCookie(
+          "refreshToken",
+          refreshCookieOptions()
+        );
+
+        return res.status(401).json({
+          success: false,
+          message: "Unauthorized. Please login again",
+        });
+      }
+
+      // 6. Generate new tokens
+      const newAccessToken = generateAccessToken(user);
+
+      const newRefreshToken = generateRefreshToken(user);
+
+      // 7. Hash new refresh token
+      const newRefreshTokenHash = hashToken(
+        newRefreshToken
+      );
+
+      // 8. Atomically replace old refresh token
+      const result = await User.updateOne(
+        {
+          _id: user._id,
+          refreshTokenHash: incomingHash,
+          refreshTokenExpiresAt: {
+            $gt: new Date(),
+          },
+        },
+        {
+          $set: {
+            refreshTokenHash: newRefreshTokenHash,
+            refreshTokenExpiresAt: getRefreshExpiry(),
+          },
+        }
+      );
+
+      // 9. Prevent reuse of an already rotated token
+      if (result.modifiedCount !== 1) {
+        res.clearCookie(
+          "refreshToken",
+          refreshCookieOptions()
+        );
+
+        return res.status(401).json({
+          success: false,
+          message: "Refresh token already used or invalid",
+        });
+      }
+
+      // 10. Set new refresh token cookie
+      res.cookie(
+        "refreshToken",
+        newRefreshToken,
+        refreshCookieOptions()
+      );
+
+      // 11. Return new access token
+      return res.status(200).json({
+        success: true,
+        message: "Token refreshed successfully",
+        accessToken: newAccessToken,
+      });
+
+    } catch (error) {
+
+      console.error("Refresh Token Error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+      });
+    }
+  }
+
 
   async dashboard(req, res) {
     try {
@@ -198,6 +413,54 @@ class AuthController {
       return res.status(500).json({
         success: false,
         message: error.message,
+      });
+    }
+  }
+
+    // LOGOUT
+  async logout(req, res) {
+    try {
+
+      const refreshToken = req.cookies?.refreshToken;
+
+      if (refreshToken) {
+
+        const refreshTokenHash = hashToken(refreshToken);
+
+        // Invalidate refresh token in database
+        await User.updateOne(
+          {
+            refreshTokenHash,
+          },
+          {
+            $set: {
+              refreshTokenHash: null,
+              refreshTokenExpiresAt: null,
+            },
+          }
+        );
+      }
+
+      // Clear cookie
+      res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        path: "/api/auth",
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Logged out successfully",
+      });
+
+    } catch (error) {
+
+      console.error("Logout Error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
       });
     }
   }

@@ -23,7 +23,8 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: true,
+      select: false,
     },
     is_Active: {
       type: Boolean,
@@ -34,7 +35,22 @@ const UserSchema = new Schema(
       enum: ["user", "admin"],
       default: "user",
     },
-     isVerified: {
+    //  store hashed refresh token
+    refreshTokenHash: {
+      type: String,
+      default: null,
+      select: false,
+    },
+
+    refreshTokenExpiresAt: {
+      type: Date,
+      default: null,
+    },
+    lastLogin: {
+      type: Date,
+      default: null,
+    },
+    isVerified: {
       type: Boolean,
       default: false,
     },

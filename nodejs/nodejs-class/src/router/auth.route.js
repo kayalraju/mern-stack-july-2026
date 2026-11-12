@@ -11,7 +11,9 @@ const Router=express.Router();
 Router.post('/register', Validation.validate(AuthValidation.signup),authController.register)
 Router.post('/verify',authController.verify)
 Router.post('/login',authController.login)
+Router.post('/refresh-token',authController.refreshToken)
 Router.get('/dashboard',Auth,authController.dashboard)
+Router.post("/logout", authController.logout);
 Router.post('/update-password',Auth,authController.updatePassword)
 Router.post("/reset-password/link",authController.resetPasswordLink);
 Router.post("/reset-password/:id/:token",authController.resetPassword);

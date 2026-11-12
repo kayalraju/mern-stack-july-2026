@@ -277,3 +277,115 @@
 {"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-09T06:28:46.439Z"}
 {"level":"error","message":"Operation `users.findOne()` buffering timed out after 10000ms","service":"webskitters-service","stack":"MongooseError: Operation `users.findOne()` buffering timed out after 10000ms\n    at Timeout._onTimeout (D:\\mern-stack-july-2026-batch\\nodejs\\nodejs-class\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:142:25)\n    at listOnTimeout (node:internal/timers:608:17)\n    at process.processTimers (node:internal/timers:543:7)","timestamp":"2026-11-09T06:29:14.346Z"}
 {"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.ceiwmwq.mongodb.net","level":"error","message":"Error connecting to database: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net","service":"webskitters-service","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)","syscall":"querySrv","timestamp":"2026-11-09T06:29:31.792Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:44:31.595Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:44:32.123Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:46:32.322Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:46:32.847Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:46:34.974Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:46:35.420Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:47:07.423Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:47:07.852Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:47:16.588Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:47:17.045Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:54:14.824Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:54:15.306Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:54:17.282Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:54:17.725Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:54:28.066Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:54:30.655Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:54:31.070Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:54:53.622Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:54:54.090Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:55:17.222Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:55:17.723Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:56:04.898Z"}
+{"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.ceiwmwq.mongodb.net","level":"error","message":"Error connecting to database: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net","service":"webskitters-service","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)","syscall":"querySrv","timestamp":"2026-11-12T04:56:46.183Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:57:12.869Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:57:13.351Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:59:46.488Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:59:47.030Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T04:59:52.807Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T04:59:53.247Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:00:19.782Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:00:20.238Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:00:23.989Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:00:24.459Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:01:44.617Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:01:45.151Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:01:46.792Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:01:47.281Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:04:38.180Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:04:39.800Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:05:20.098Z"}
+{"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.ceiwmwq.mongodb.net","level":"error","message":"Error connecting to database: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net","service":"webskitters-service","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)","syscall":"querySrv","timestamp":"2026-11-12T05:06:14.545Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:07:30.542Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:07:31.026Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:10:51.250Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:11:03.405Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:13:24.578Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:13:25.073Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:13:52.412Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:13:52.854Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:15:36.660Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:15:37.479Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:20:49.807Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:20:50.314Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:24:56.909Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:24:57.490Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:25:24.249Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:25:24.710Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:25:26.087Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:25:26.501Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T05:26:53.207Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T05:26:53.742Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:32:30.848Z"}
+{"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.ceiwmwq.mongodb.net","level":"error","message":"Error connecting to database: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net","service":"webskitters-service","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.ceiwmwq.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17)","syscall":"querySrv","timestamp":"2026-11-12T08:33:21.124Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:35:50.865Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:35:51.390Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:43:13.069Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:43:13.542Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:45:35.449Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:45:36.645Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:52:24.953Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:52:25.942Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:10.990Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:11.440Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:16.490Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:17.004Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:19.203Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:19.659Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:22.702Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:24.155Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:24.640Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:32.413Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:32.981Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:34.359Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:40.871Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:41.427Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:53:46.687Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:53:47.141Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:55:18.044Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:55:18.597Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:56:08.718Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:56:09.261Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:56:35.946Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:56:36.459Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T08:58:46.892Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T08:58:47.444Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:05:49.181Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:05:49.721Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:05:51.548Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:05:52.011Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:06:56.546Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:06:57.087Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:07:00.246Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:07:01.785Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:07:17.646Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:07:19.024Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:07:19.550Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:07:21.116Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:07:21.579Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:11:59.644Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:12:00.300Z"}
+{"level":"info","message":"server is running on port http://localhost:3006","service":"webskitters-service","timestamp":"2026-11-12T09:12:02.921Z"}
+{"level":"info","message":"Database connected successfully","service":"webskitters-service","timestamp":"2026-11-12T09:12:03.418Z"}
