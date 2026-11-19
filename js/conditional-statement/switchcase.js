@@ -18,7 +18,7 @@
 
 //check week
 
-const day=2;
+const day=10;
 switch(day){
     case 1:
         console.log("monday");

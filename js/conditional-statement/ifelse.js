@@ -6,13 +6,19 @@
 //     //false
 // }
 
-//ifelse
-// const age=20;
-// if(age<18){
-//     console.log("you can drive");
+// if(false){
+//     console.log("my name is shubham");
 // }else{
-//     console.log("you can not drive");
+//     console.log("you not shubham");
 // }
+
+//ifelse
+const age=18;
+if(age>=18){
+    console.log("you can drive");
+}else{
+    console.log("you can not drive");
+}
 
 
 //odd or even
@@ -35,4 +41,16 @@
 // }  
 // else{  
 // console.log("a is not equal to 10, 15 or 20");  
-// }  
+// }
+
+
+const student="pritam"
+
+if(student=="pritam"){
+    console.log("you are pritam");
+}else if(student=="raju"){
+    console.log("you are raju");
+}else{
+    console.log("you are not pritam or raju");
+
+}

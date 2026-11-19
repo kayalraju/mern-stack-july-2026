@@ -26,6 +26,6 @@ if(data){
     document.write("No data found");
 }
 
-//document.getElementById("name").innerHTML=data.name
+document.getElementById("name").innerHTML=data.name
 
- localStorage.removeItem("user");
+ //localStorage.removeItem("user");
