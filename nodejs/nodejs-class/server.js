@@ -59,6 +59,8 @@ app.use('/api/admin',adminRouter)
 const employeeRoute=require('./src/router/employee.route')
 app.use('/api',employeeRoute)
 
+const lookupRouter=require('./src/router/lookupRoute')
+app.use('/api',lookupRouter)
 
 const Port=process.env.PORT || 3000;
 
