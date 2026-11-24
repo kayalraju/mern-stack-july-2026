@@ -46,7 +46,7 @@
 // }, 5000);
 
 
-//****callback */
+//****callback: A function passed as an argument to another function. */
 
 // function greet(name) {
 //     console.log("Hello " + name);
@@ -59,35 +59,35 @@
 // processUser(greet);
 
 
-//***higher order function */
+//***higher order function: A function that accepts another function as an argument or returns a function. */
 
-// function add(num1, num2) {
-//     return num1 + num2;
-// }
+function add(num1, num2) {
+    return num1 + num2;
+}
 
-// function multiply(num1, num2) {
-//     return num1 * num2;
-// }
+function multiply(num1, num2) {
+    return num1 * num2;
+}
 
-// function calculate(num1, num2, callback) {
-//     return callback(num1, num2);
-// }
+function calculate(num1, num2, callback) {
+    return callback(num1, num2);
+}
 
-// console.log(calculate(2, 3, add));
-// console.log(calculate(2, 3, multiply));
+console.log(calculate(2, 3, add));
+console.log(calculate(2, 3, multiply));
 
 
-//*** recurssion */
+//*** Recursive: A function that calls itself. */
 
-// function factorial(n) {
-//     if (n === 1) {
-//         return 1;
-//     }
+function factorial(n) {
+    if (n === 1) {
+        return 1;
+    }
 
-//     return n * factorial(n - 1);
-// }
+    return n * factorial(n - 1);
+}
 
-// console.log(factorial(5));
+console.log(factorial(5));
 
 
 // const fruits = ["Apple", "Mango", "Orange","banana","grapes","pineapple"];
@@ -225,8 +225,8 @@
 // console.log(result);
 
 //*********sort     */
-const fruits = ["Orange", "Apple", "Banana"];
+// const fruits = ["Orange", "Apple", "Banana"];
 
-fruits.sort();
+// fruits.sort();
 
-console.log(fruits);
+// console.log(fruits);
